@@ -1,2 +1,3 @@
 certs/
 env_variables.sh
+__pycache__/

@@ -20,8 +20,9 @@ def sensor_data():
 
     except Exception as error:
         dhtDevice.exit()
-        raise error
         return data
+        raise error
+        
 
     return data
 

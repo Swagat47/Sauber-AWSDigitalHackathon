@@ -50,9 +50,9 @@ myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 while True:
     c, f, humi = sensor_data()
     res = []
-    res.append(myAWSIoTMQTTClient.publish("temp_c", c, 1))
-    res.append(myAWSIoTMQTTClient.publish("temp_f", f, 1))
-    res.append(myAWSIoTMQTTClient.publish("humidity", humi, 1))
+    res.append(myAWSIoTMQTTClient.publish("/get", c, 1))
+    res.append(myAWSIoTMQTTClient.publish("/get", f, 1))
+    res.append(myAWSIoTMQTTClient.publish("/get", humi, 1))
     if False in res:
         print('Failed')
     if False not in res:
