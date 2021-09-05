@@ -1,4 +1,4 @@
-import board, adafruit_dht, os, urllib2, time
+import board, adafruit_dht, os, requests, time
 
 # Initial the dht device, with data pin connected to:
 dhtDevice = adafruit_dht.DHT22(board.D18)
@@ -43,7 +43,8 @@ if __name__ == '__main__':
             print(data)
             url = genrate_url(send_key, data, send_URL)
             print(url)
-            connection = urllib2.urlopen(url)
+            connection = requests.get(url)
+            print(connection.status_code)
             connection.close()
             time.sleep(2)
     except KeyboardInterrupt:
