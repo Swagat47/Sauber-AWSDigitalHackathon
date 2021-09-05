@@ -1,0 +1,4 @@
+Adafruit_Blinka==6.13.0
+requests==2.26.0
+adafruit_dht==1.4.0
+board==1.0
