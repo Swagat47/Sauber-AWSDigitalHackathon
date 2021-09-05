@@ -1,3 +1,4 @@
 certs/
 env_variables.sh
 __pycache__/
+.idea/

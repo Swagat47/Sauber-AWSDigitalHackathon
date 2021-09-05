@@ -25,7 +25,7 @@ proxy_options = None
 signing_region = 'us-east-1'
 verbosity = io.LogLevel.Debug.name
 count = 0
-tpoic = "test/topic"
+topic = "test/topic"
 message = True
 
 # Using globals to simplify sample code
