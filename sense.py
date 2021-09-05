@@ -1,8 +1,9 @@
-import board
-import adafruit_dht
+import board, adafruit_dht, os, urllib2, time
 
 # Initial the dht device, with data pin connected to:
 dhtDevice = adafruit_dht.DHT22(board.D18)
+send_URL = 'https://api.thingspeak.com/update?'
+send_key = os.environ['SENDKEY']
 
 def sensor_data():
     data = [0, 0, 0]
@@ -26,7 +27,29 @@ def sensor_data():
 
     return data
 
+def genrate_url(key, data, url):
+    final_url = url + 'api_key=' + key
+    count = 1
+    for field in data:
+        final_url += '&field' + count + '=' + data
+        count += 1
+    return final_url
+
+
 if __name__ == '__main__':
-    pass
+    try:
+        while True:
+            data = sensor_data()
+            print(data)
+            url = genrate_url(send_key, data, send_URL)
+            print(url)
+            connection = urllib2.urlopen(url)
+            connection.close()
+            time.sleep(2)
+    except KeyboardInterrupt:
+        print('Closed by User')
+    except Exception as e:
+        print(e)
+
 
     
