@@ -36,13 +36,17 @@ myMQTTClient.configureMQTTOperationTimeout(5) # 5 sec
 print ('Initiating Realtime Data Transfer From Raspberry Pi...')
 myMQTTClient.connect()
 
-
-while True:
-    c, f, h = sensor_data()
-    message = c
-    message_json = json.dumps(message)
-    mqtt_connection.publish(
-        topic=topic,
-        payload=message_json,
-        qos=1)
-    time.sleep(2)
+try:
+    while True:
+        c, f, h = sensor_data()
+        message = c
+        message_json = json.dumps(message)
+        mqtt_connection.publish(
+            topic=topic,
+            payload=message_json,
+            qos=1)
+        time.sleep(2)
+except KeyboardInterrupt:
+    pass
+except Exception as e:
+    print(e)
