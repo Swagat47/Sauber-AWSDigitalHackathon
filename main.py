@@ -1,6 +1,7 @@
 import board, adafruit_dht, os, requests, time
+from http.client import responses
 
-# Initial the dht device, with data pin connected to:
+
 dhtDevice = adafruit_dht.DHT22(board.D18)
 send_URL = 'https://api.thingspeak.com/update?'
 send_key = os.environ['SENDKEY']
@@ -8,14 +9,12 @@ send_key = os.environ['SENDKEY']
 def sensor_data():
     data = [None, None, None]
     try:
-        # Print the values to the serial port
         temperature_c = dhtDevice.temperature
         temperature_f = temperature_c * (9 / 5) + 32
         humidity = dhtDevice.humidity
         data = [temperature_c, temperature_f, humidity]
 
     except RuntimeError as error:
-        # Errors happen fairly often, DHT's are hard to read, just keep going
         print(error.args[0])
         return data
 
@@ -52,6 +51,3 @@ if __name__ == '__main__':
         print('Closed by User')
     except Exception as e:
         print(e)
-
-
-    
